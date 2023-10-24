@@ -33,13 +33,14 @@ def get_nb_of_attack_types(dataframe: pd.DataFrame) -> int:
 
     return len(dataframe['attack_type'].unique())
 
-def get_list_of_if_outliers(dataframe: pd.DataFrame, outlier_fraction: float) -> list[int]:
+def get_list_of_if_outliers(dataframe: pd.DataFrame, outlier_fraction: float, seed: int=42) -> list[int]:
     """
     Extract the list of outliers according to Isolation Forest algorithm
  
     Args:
         dataframe (pd.DataFrame): input dataframe
         outlier_fraction (float): rate of outliers to be extracted
+        seed (int): seed for reproducibility
     Returns:
         list[int]: list of outliers according to Isolation Forest algorithm
     """
@@ -49,7 +50,7 @@ def get_list_of_if_outliers(dataframe: pd.DataFrame, outlier_fraction: float) ->
     one_hot_encoded = get_one_hot_encoded_dataframe(dataframe)
     no_nan_df = remove_nan_through_mean_imputation(one_hot_encoded)
     
-    iforest = IsolationForest(contamination=outlier_fraction, random_state=42)
+    iforest = IsolationForest(contamination=outlier_fraction, random_state=seed)
     predictions = iforest.fit_predict(no_nan_df)
     indices = [i for i, x in enumerate(predictions) if x == -1]
 
