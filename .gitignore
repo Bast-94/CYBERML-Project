@@ -1,5 +1,4 @@
 # Data files
-data/~*
 data/*.csv
 
 # Ignore pycache
