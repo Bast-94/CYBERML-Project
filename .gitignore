@@ -1,5 +1,6 @@
 # Data files
 data/*.csv
+figures/
 
 # Ignore pycache
 __pycache__/
