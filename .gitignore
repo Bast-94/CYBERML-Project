@@ -1,6 +1,6 @@
 # Data files
-data/~*
 data/*.csv
+figures/
 
 # Ignore pycache
 __pycache__/
